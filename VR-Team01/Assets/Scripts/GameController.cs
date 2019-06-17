@@ -13,13 +13,15 @@ public class GameController : MonoBehaviour
     public Transform bar;
     public float startTime;
     public float healValue;
+    public bool canPush;
+    public GameObject greenCube;
     // Start is called before the first frame update
     void Start()
     {
         slideValue = curTime / maxHP;
         hpLeft = 240f;
         curTime = 240f;
-
+        canPush = true;
         startTime = 240f;
         InvokeRepeating("GoTime", 0.0f, 1.0f);
     }
@@ -32,10 +34,37 @@ public class GameController : MonoBehaviour
         timeText.text = "Time: "+curTime;
         bar.localScale = new Vector3(slideValue, 1f);
 
-        if (Input.GetKeyDown(KeyCode.A))
+        if (canPush)
         {
-            Heal();
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                Heal();
+                StartCoroutine(DelayPush());
+                Debug.Log("Hit");
+            }
         }
+        if (canPush)
+        {
+            greenCube.gameObject.SetActive(true);
+        }
+        if (!canPush)
+        {
+            greenCube.gameObject.SetActive(false);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (canPush)
+        {
+            if (other.gameObject.CompareTag("HandCheck"))
+            {
+                Heal();
+                StartCoroutine(DelayPush());
+                Debug.Log("Hit");
+            }
+        }
+        
     }
     private void FixedUpdate()
     {
@@ -46,11 +75,18 @@ public class GameController : MonoBehaviour
     {
         //Debug.Log("count");
         curTime--;
-        Debug.Log("hpLeft:"+hpLeft+"slideValue"+slideValue);
+        //Debug.Log("hpLeft:"+hpLeft+"slideValue"+slideValue);
     }
     void Heal()
     {
         hpLeft += 5.0f;
         Debug.Log("hpleft:" + hpLeft);
+    }
+
+    IEnumerator DelayPush()
+    {
+        canPush = false;
+        yield return new WaitForSeconds(0.5f);
+        canPush = true;
     }
 }
