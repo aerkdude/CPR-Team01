@@ -315,6 +315,8 @@ MonoBehaviour:
   healValue: 10
   canPush: 0
   greenCube: {fileID: 0}
+  curHp: 0
+  pushHp: 0
 --- !u!4 &29247270
 Transform:
   m_ObjectHideFlags: 0
@@ -433,7 +435,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: -6.9e-44, y: -6.9e-44, z: NaN, w: 5.6e-44}
+  m_BoundingSphereOverride: {x: 7.711e-42, y: 6e-44, z: 4.61e-43, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -910,17 +912,17 @@ PrefabInstance:
     - target: {fileID: 9184718880311578334, guid: 7e2435b801106d74793026f6157bf0d2,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 100
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9184718880311578334, guid: 7e2435b801106d74793026f6157bf0d2,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 100
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9184718880311578334, guid: 7e2435b801106d74793026f6157bf0d2,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 100
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 749416111437744486, guid: 7e2435b801106d74793026f6157bf0d2,
         type: 3}
@@ -1174,7 +1176,7 @@ Transform:
   m_GameObject: {fileID: 1428446896869435154}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.65, z: 0.8}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children:
   - {fileID: 6916584507287555623}
   - {fileID: 7733462056367283773}
@@ -1276,7 +1278,7 @@ Transform:
   m_GameObject: {fileID: 1872151197437083037}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 2704839537581856001}
   m_RootOrder: 0
@@ -1298,7 +1300,7 @@ Transform:
   m_GameObject: {fileID: 5262366497181003958}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 2704839537581856001}
   m_RootOrder: 1
@@ -1424,3 +1426,5 @@ MonoBehaviour:
   healValue: 0
   canPush: 0
   greenCube: {fileID: 1176821959}
+  curHp: 2
+  pushHp: 8

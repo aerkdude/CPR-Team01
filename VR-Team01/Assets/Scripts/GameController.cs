@@ -15,6 +15,8 @@ public class GameController : MonoBehaviour
     public float healValue;
     public bool canPush;
     public GameObject greenCube;
+    public int curHp;
+    public float pushHp;
     // Start is called before the first frame update
     void Start()
     {
@@ -70,7 +72,7 @@ public class GameController : MonoBehaviour
     {
     if(hpLeft>0)
         {
-            hpLeft -=  3*Time.deltaTime;
+            hpLeft -=  curHp*Time.deltaTime;
         }
        
     }
@@ -83,7 +85,7 @@ public class GameController : MonoBehaviour
     }
     void Heal()
     {
-        hpLeft += 5.0f;
+        hpLeft += pushHp;
         Debug.Log("hpleft:" + hpLeft);
         if(hpLeft>=maxHP)
         {
