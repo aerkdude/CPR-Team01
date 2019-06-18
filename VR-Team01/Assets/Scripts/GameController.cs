@@ -89,4 +89,22 @@ public class GameController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         canPush = true;
     }
+    ///
+   /* string nameA, nameB;
+
+    void test()
+    {
+        for (int i = 0; i < nameA.Length; i++)
+        {
+            if (nameA[i] == nameB[i])
+            {
+
+            }
+
+            }
+
+    }*/
+
+    ///
+
 }
