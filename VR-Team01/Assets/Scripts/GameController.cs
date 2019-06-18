@@ -68,7 +68,11 @@ public class GameController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        hpLeft -=  Time.deltaTime;
+    if(hpLeft>0)
+        {
+            hpLeft -=  3*Time.deltaTime;
+        }
+       
     }
 
     void GoTime()
@@ -81,6 +85,10 @@ public class GameController : MonoBehaviour
     {
         hpLeft += 5.0f;
         Debug.Log("hpleft:" + hpLeft);
+        if(hpLeft>=maxHP)
+        {
+            hpLeft = maxHP;
+        }
     }
 
     IEnumerator DelayPush()
