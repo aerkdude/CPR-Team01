@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CanvaasController : MonoBehaviour
+public class CanvasController : MonoBehaviour
 {
     public GameObject questionCanvas;
     public bool activeCancas;
