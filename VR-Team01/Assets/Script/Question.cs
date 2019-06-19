@@ -35,6 +35,8 @@ public class Question : MonoBehaviour
         {
             InputAnswer.clearInputField();
             ShowHint();
+            Timer = 0;
+            questionCanvas.SetActive(false);
         }
 
         if (Timer <= 10)
