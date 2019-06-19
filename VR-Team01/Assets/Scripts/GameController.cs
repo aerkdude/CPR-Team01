@@ -59,7 +59,7 @@ public class GameController : MonoBehaviour
     {
         if (canPush)
         {
-            if (other.gameObject.CompareTag("HandCheck"))
+            if (other.gameObject.CompareTag("CheckHand"))
             {
                 Heal();
                 StartCoroutine(DelayPush());
