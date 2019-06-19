@@ -852,7 +852,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 1.8061464e+28, y: 4.543496e-39, z: 3e-45, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -1032,6 +1032,7 @@ MonoBehaviour:
   questionCanvas: {fileID: 1824146410}
   activeCancas: 0
   Timer: 0
+  hint: 
   question:
   - '1+1 = '
   - 2+2 =

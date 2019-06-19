@@ -10,7 +10,7 @@ public class Question : MonoBehaviour
     public float Timer;
 
     private string guess;
-    private string hint;
+    public string hint;
     public string[] question;
     public int questionNo;
     public Text questionText;
@@ -51,21 +51,25 @@ public class Question : MonoBehaviour
             questionCanvas.SetActive(true);
             InputAnswer.ActivateInputField();
             if (questionNo == 0)
-                 { 
-                 questionText.text = "" + question[0];
+                 {
+                    hint = "2";
+                    questionText.text = "" + question[0];
 
                  }
                  if (questionNo == 1)
                  {
-                     questionText.text = "" + question[1];
+                    hint = "4";
+                    questionText.text = "" + question[1];
                  }
                  if (questionNo == 2)
                  {
-                     questionText.text = "" + question[2];
+                    hint = "6";
+                    questionText.text = "" + question[2];
                  }
                  if (questionNo == 3)
                  {
-                     questionText.text = "" + question[3];
+                hint = "8";
+                questionText.text = "" + question[3];
                  }
         }
     
@@ -90,7 +94,6 @@ public class Question : MonoBehaviour
         switch (questionNo)
         {
             case 0:
-                hint = "2";
                 if (guess == "2")
                 {
                     Debug.Log("Correct");
@@ -103,7 +106,6 @@ public class Question : MonoBehaviour
                 }
                 break;
             case 1:
-                hint = "4";
                 if (guess == "4")
                 {
                     Debug.Log("Correct");
@@ -116,7 +118,6 @@ public class Question : MonoBehaviour
                 }
                 break;
             case 2:
-                hint = "6";
                 if (guess == "6")
                 {
                     Debug.Log("Correct");
@@ -129,7 +130,6 @@ public class Question : MonoBehaviour
                 }
                 break;
             case 3:
-                hint = "8";
                 if (guess == "8")
                 {
                     Debug.Log("Correct");
