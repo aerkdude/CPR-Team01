@@ -31,10 +31,10 @@ public class Question : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.KeypadEnter)) //Send Answer
+        if (Input.GetKeyDown(KeyCode.Return)) //Send Answer
         {
             InputAnswer.clearInputField();
-            GetText();
+            ShowHint();
             Timer = 0;
             questionCanvas.SetActive(false);
         }
@@ -100,13 +100,11 @@ public class Question : MonoBehaviour
                 if (guess == "2")
                 {
                     Debug.Log("Correct");
-                    ShowHint();
                     ResetAnswer();
                 }
                 else
                 {
                     Debug.Log("Wrong");
-                    ShowHint();
                     ResetAnswer();
                 }
                 break;
@@ -114,13 +112,11 @@ public class Question : MonoBehaviour
                 if (guess == "4")
                 {
                     Debug.Log("Correct");
-                    ShowHint();
                     ResetAnswer();
                 }
                 else
                 {
                     Debug.Log("Wrong");
-                    ShowHint();
                     ResetAnswer();
                 }
                 break;
@@ -128,13 +124,11 @@ public class Question : MonoBehaviour
                 if (guess == "6")
                 {
                     Debug.Log("Correct");
-                    ShowHint();
                     ResetAnswer();
                 }
                 else
                 {
                     Debug.Log("Wrong");
-                    ShowHint();
                     ResetAnswer();
                 }
                 break;
@@ -142,20 +136,15 @@ public class Question : MonoBehaviour
                 if (guess == "8")
                 {
                     Debug.Log("Correct");
-                    ShowHint();
                     ResetAnswer();
                 }
                 else
                 {
                     Debug.Log("Wrong");
-                    ShowHint();
                     ResetAnswer();
                 }
                 break;
         }
-    }
-    public void GetText()
-    {
     }
     public void ShowHint()
     {
