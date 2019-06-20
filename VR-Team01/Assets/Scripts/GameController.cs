@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
     public GameObject greenCube;
-    public Transform bar;
+    public Image bar;
     public Text timeText;
-    public TextMesh hpPercText;
+    public Text hpPercText;
     private int hpPerc;
     private int hpPercCeil;
     public float curTime;
@@ -37,7 +37,7 @@ public class GameController : MonoBehaviour
         
         slideValue = hpLeft / maxHP;
         timeText.text = "Time: "+curTime;
-        bar.localScale = new Vector3(slideValue, 1f);
+        bar.fillAmount = slideValue;
         hpPerc = (Mathf.CeilToInt(hpLeft / maxHP * 100.0f));
         hpPercText.text = hpPerc + " / 100%";
         if (canPush)

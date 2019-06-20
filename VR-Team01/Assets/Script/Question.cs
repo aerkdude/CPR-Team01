@@ -31,9 +31,10 @@ public class Question : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return)) //Send Answer
+        if (Input.GetKeyDown(KeyCode.KeypadEnter)) //Send Answer
         {
             InputAnswer.clearInputField();
+            GetText();
             Timer = 0;
             questionCanvas.SetActive(false);
         }
@@ -152,6 +153,9 @@ public class Question : MonoBehaviour
                 }
                 break;
         }
+    }
+    public void GetText()
+    {
     }
     public void ShowHint()
     {
