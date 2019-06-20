@@ -31,7 +31,7 @@ public class Question : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return)) //Send Answer
         {
             InputAnswer.clearInputField();
             ShowHint();
@@ -44,42 +44,43 @@ public class Question : MonoBehaviour
          // string input = InputAnswer.ToString();
             Timer += Time.deltaTime;
             questionNo = Random.Range(0, 4);
+            GameController.pushHp = 20.0f;
             //Debug.Log("questtion:" + questionNo);
             questionCanvas.SetActive(false);
 
         }
         else if (Timer > 10 && Timer <= 20 )
         {
+            GameController.pushHp = 2.0f;
             questionCanvas.SetActive(true);
             InputAnswer.ActivateInputField();
             if (questionNo == 0)
-                 {
-                    hint = "2";
-                    questionText.text = "" + question[0];
-
-                 }
-                 if (questionNo == 1)
-                 {
-                    hint = "4";
-                    questionText.text = "" + question[1];
-                 }
-                 if (questionNo == 2)
-                 {
-                    hint = "6";
-                    questionText.text = "" + question[2];
-                 }
-                 if (questionNo == 3)
-                 {
+            {
+                hint = "2";
+                questionText.text = "" + question[0];
+            }
+            if (questionNo == 1)
+            {
+                hint = "4";
+                questionText.text = "" + question[1];
+            }
+            if (questionNo == 2)
+            {
+                hint = "6";
+                questionText.text = "" + question[2];
+            }
+            if (questionNo == 3)
+            {
                 hint = "8";
                 questionText.text = "" + question[3];
-                 }
+            }
         }
     
-          else
-            {
-                Timer = 0;
-                questionCanvas.SetActive(false);
-            }
+        else
+        {
+            Timer = 0;
+            questionCanvas.SetActive(false);
+        }
             CurTimer();
 
     }
@@ -170,7 +171,7 @@ public static class Extension
     {
         inputField.Select();
         inputField.text = "";
-        //Debug.Log("cleaer");
+        //Debug.Log("clear");
     }
 }
 
