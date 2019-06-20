@@ -5,15 +5,18 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
+    public GameObject greenCube;
+    public Transform bar;
+    public Text timeText;
+    public TextMesh hpPercText;
+    private int hpPerc;
+    private int hpPercCeil;
     public float curTime;
     public float maxHP = 480f;
-    public Text timeText;
     private float slideValue;
     private float hpLeft;
-    public Transform bar;
     public float startTime;
     public bool canPush;
-    public GameObject greenCube;
     public int curHp;
     public static float pushHp;
     // Start is called before the first frame update
@@ -35,7 +38,8 @@ public class GameController : MonoBehaviour
         slideValue = hpLeft / maxHP;
         timeText.text = "Time: "+curTime;
         bar.localScale = new Vector3(slideValue, 1f);
-
+        hpPerc = (Mathf.CeilToInt(hpLeft / maxHP * 100.0f));
+        hpPercText.text = hpPerc + " / 100%";
         if (canPush)
         {
             if (Input.GetKeyDown(KeyCode.A))
