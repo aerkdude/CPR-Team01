@@ -33,6 +33,7 @@ public class Question : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return)) //Send Answer
         {
+            ProcessText();
             InputAnswer.clearInputField();
             ShowHint();
             Timer = 0;
@@ -84,16 +85,10 @@ public class Question : MonoBehaviour
             CurTimer();
 
     }
-
-    void CurTimer()
+    void ProcessText()
     {
-        Timer += Time.deltaTime;
-    }
-
-    public void GetInput(string guess)
-    {
-        //Debug.Log("typed:" + guess);
-
+        guess = InputAnswer.text;
+        //Debug.Log(guess);
         switch (questionNo)
         {
             case 0:
@@ -146,6 +141,11 @@ public class Question : MonoBehaviour
                 break;
         }
     }
+    void CurTimer()
+    {
+        Timer += Time.deltaTime;
+    }
+
     public void ShowHint()
     {
         hintText.text = "Answer: "+hint;
