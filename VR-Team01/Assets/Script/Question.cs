@@ -34,7 +34,6 @@ public class Question : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return)) //Send Answer
         {
             InputAnswer.clearInputField();
-            ShowHint();
             Timer = 0;
             questionCanvas.SetActive(false);
         }
@@ -100,11 +99,13 @@ public class Question : MonoBehaviour
                 if (guess == "2")
                 {
                     Debug.Log("Correct");
+                    ShowHint();
                     ResetAnswer();
                 }
                 else
                 {
                     Debug.Log("Wrong");
+                    ShowHint();
                     ResetAnswer();
                 }
                 break;
@@ -112,11 +113,13 @@ public class Question : MonoBehaviour
                 if (guess == "4")
                 {
                     Debug.Log("Correct");
+                    ShowHint();
                     ResetAnswer();
                 }
                 else
                 {
                     Debug.Log("Wrong");
+                    ShowHint();
                     ResetAnswer();
                 }
                 break;
@@ -124,11 +127,13 @@ public class Question : MonoBehaviour
                 if (guess == "6")
                 {
                     Debug.Log("Correct");
+                    ShowHint();
                     ResetAnswer();
                 }
                 else
                 {
                     Debug.Log("Wrong");
+                    ShowHint();
                     ResetAnswer();
                 }
                 break;
@@ -136,11 +141,13 @@ public class Question : MonoBehaviour
                 if (guess == "8")
                 {
                     Debug.Log("Correct");
+                    ShowHint();
                     ResetAnswer();
                 }
                 else
                 {
                     Debug.Log("Wrong");
+                    ShowHint();
                     ResetAnswer();
                 }
                 break;
