@@ -16,22 +16,29 @@ public class CanvasController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Timer >= 20)
+        if (GameController.gameStart)
         {
-           
-            Timer = 0;
-           
+            CprStart();
         }
-         if(Timer >= 10 && Timer< 20)
-            {
-                questionCanvas.SetActive(true);
-            }
-            else if (Timer>=20||Timer<10)
-            {
-                questionCanvas.SetActive(false);
-            }
-        CurTimer();
         
+    }
+    private void CprStart()
+    {
+        if (Timer >= 20)
+        {
+
+            Timer = 0;
+
+        }
+        if (Timer >= 10 && Timer < 20)
+        {
+            questionCanvas.SetActive(true);
+        }
+        else if (Timer >= 20 || Timer < 10)
+        {
+            questionCanvas.SetActive(false);
+        }
+        CurTimer();
     }
    
     void CurTimer()
