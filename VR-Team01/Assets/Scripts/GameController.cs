@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
     public Image bar;
     public Text timeText;
     public Text hpPercText;
+    public static bool gameStart;
     private int hpPerc;
     private int hpPercCeil;
     public float curTime;
@@ -22,24 +23,43 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        timeText.text = "";
+        hpPercText.text = "";
+        gameStart = false;
         slideValue = curTime / maxHP;
         hpLeft = 240f;
         curTime = 240f;
         canPush = true;
         startTime = 240f;
-        InvokeRepeating("GoTime", 0.0f, 1.0f);
         pushHp = 20.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (gameStart)
+        {
+            CprStart();
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            gameStart = true;
+            InvokeRepeating("GoTime", 0.0f, 1.0f);
+        }
+    }
+
+    private void CprStart()
+    {
         slideValue = hpLeft / maxHP;
-        timeText.text = "Time: "+curTime;
+        timeText.text = "Time: " + curTime;
         bar.fillAmount = slideValue;
         hpPerc = (Mathf.CeilToInt(hpLeft / maxHP * 100.0f));
         hpPercText.text = hpPerc + " / 100%";
+
+        if (hpLeft > 0)
+        {
+            hpLeft -= curHp * Time.deltaTime;
+        }
         if (canPush)
         {
             if (Input.GetKeyDown(KeyCode.A))
@@ -71,14 +91,6 @@ public class GameController : MonoBehaviour
             }
         }
         
-    }
-    private void FixedUpdate()
-    {
-    if(hpLeft>0)
-        {
-            hpLeft -=  curHp*Time.deltaTime;
-        }
-       
     }
 
     void GoTime()

@@ -32,7 +32,7 @@ public class StartButton : MonoBehaviour
         fadeIn.GetComponent<FadeIn>().FadeOutAnim();
         FadeButton();
         yield return new WaitForSeconds(5.0f);
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
     public void FadeButton()
     {

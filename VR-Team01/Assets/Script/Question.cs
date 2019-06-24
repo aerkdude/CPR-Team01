@@ -9,6 +9,7 @@ public class Question : MonoBehaviour
     public bool activeCancas;
     public float Timer;
 
+    
     private string guess;
     public string hint;
     public string[] question;
@@ -31,6 +32,11 @@ public class Question : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+    }
+
+    private void CprStart()
+    {
         if (Input.GetKeyDown(KeyCode.Return)) //Send Answer
         {
             ProcessText();
@@ -42,7 +48,7 @@ public class Question : MonoBehaviour
 
         if (Timer <= 10)
         {
-         // string input = InputAnswer.ToString();
+            // string input = InputAnswer.ToString();
             Timer += Time.deltaTime;
             questionNo = Random.Range(0, 4);
             GameController.pushHp = 20.0f;
@@ -50,7 +56,7 @@ public class Question : MonoBehaviour
             questionCanvas.SetActive(false);
 
         }
-        else if (Timer > 10 && Timer <= 20 )
+        else if (Timer > 10 && Timer <= 20)
         {
             GameController.pushHp = 2.0f;
             questionCanvas.SetActive(true);
@@ -76,14 +82,13 @@ public class Question : MonoBehaviour
                 questionText.text = "" + question[3];
             }
         }
-    
+
         else
         {
             Timer = 0;
             questionCanvas.SetActive(false);
         }
-            CurTimer();
-
+        CurTimer();
     }
     void ProcessText()
     {
