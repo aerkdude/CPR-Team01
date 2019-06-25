@@ -11,14 +11,15 @@ public class Question : MonoBehaviour
     public float Timer;
     public GameObject phone;
     public GameObject shoulder;
-    
+
+    public bool canShowHint;
     private string guess;
     public string hint;
     public string[] question;
     public int questionNo;
     public Text questionText;
     public Text hintText;
-    public Text shoulderText;
+    public Text guideText;
     public InputField InputAnswer;
    // public int[] answer;
 
@@ -27,7 +28,8 @@ public class Question : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        shoulderText.text = "";
+        canShowHint = false;
+        guideText.text = "";
         hitShoulder = false;
         hint = "";
         guess = "";
@@ -45,10 +47,10 @@ public class Question : MonoBehaviour
         }
         if (!GameController.gameStart)
         {
-            if (Input.GetKeyDown(KeyCode.Return)) //Send Answer
+            if (Input.GetKeyDown(KeyCode.Return) && canShowHint) //Send Answer
             {
                 ProcessText();
-                ShowHint();
+                //ShowHint();
                 Timer = 0;
                 questionCanvas.SetActive(false);
             }
@@ -61,15 +63,16 @@ public class Question : MonoBehaviour
             hitShoulder = false;
         }
         InputAnswer.ActivateInputField();
+
     }
 
     private void CprStart()
     {
-        if (Input.GetKeyDown(KeyCode.Return)) //Send Answer
+        if (Input.GetKeyDown(KeyCode.Return) && canShowHint) //Send Answer
         {
             ProcessText();
             InputAnswer.clearInputField();
-            ShowHint();
+            //ShowHint();
             Timer = 0;
             questionCanvas.SetActive(false);
         }
@@ -80,6 +83,7 @@ public class Question : MonoBehaviour
             Timer += Time.deltaTime;
             questionNo = Random.Range(0, 4);
             GameController.pushHp = 20.0f;
+            canShowHint = false;
             //Debug.Log("questtion:" + questionNo);
             questionCanvas.SetActive(false);
 
@@ -89,25 +93,26 @@ public class Question : MonoBehaviour
             GameController.pushHp = 2.0f;
             questionCanvas.SetActive(true);
             Timer += Time.deltaTime;
+            canShowHint = true;
             InputAnswer.ActivateInputField();
             if (questionNo == 0)
             {
-                hint = "2";
+                hint = "4 นาที";
                 questionText.text = "" + question[0];
             }
             if (questionNo == 1)
             {
-                hint = "4";
+                hint = "100 ครั้ง:นาที";
                 questionText.text = "" + question[1];
             }
             if (questionNo == 2)
             {
-                hint = "6";
+                hint = "ไม่เกิน120ครั้ง:นาที";
                 questionText.text = "" + question[2];
             }
             if (questionNo == 3)
             {
-                hint = "8";
+                hint = "5cm";
                 questionText.text = "" + question[3];
             }
         }
@@ -125,18 +130,6 @@ public class Question : MonoBehaviour
         switch (questionNo)
         {
             case 0:
-                if (guess == "2")
-                {
-                    Debug.Log("Correct");
-                    ResetAnswer();
-                }
-                else
-                {
-                    Debug.Log("Wrong");
-                    ResetAnswer();
-                }
-                break;
-            case 1:
                 if (guess == "4")
                 {
                     Debug.Log("Correct");
@@ -148,8 +141,20 @@ public class Question : MonoBehaviour
                     ResetAnswer();
                 }
                 break;
+            case 1:
+                if (guess == "100")
+                {
+                    Debug.Log("Correct");
+                    ResetAnswer();
+                }
+                else
+                {
+                    Debug.Log("Wrong");
+                    ResetAnswer();
+                }
+                break;
             case 2:
-                if (guess == "6")
+                if (guess == "120")
                 {
                     Debug.Log("Correct");
                     ResetAnswer();
@@ -161,7 +166,7 @@ public class Question : MonoBehaviour
                 }
                 break;
             case 3:
-                if (guess == "8")
+                if (guess == "5")
                 {
                     Debug.Log("Correct");
                     ResetAnswer();
@@ -207,14 +212,16 @@ public class Question : MonoBehaviour
 
     public void ShowHint()
     {
-        hintText.text = "Answer: "+hint;
+        hintText.text = "เฉลย: "+hint;
         StartCoroutine(ClearHint());
     }
     private void ResetAnswer()
     {
+        ShowHint();
         guess = "";
         Timer = 0;
         questionCanvas.SetActive(false);
+        canShowHint = false;
         InputAnswer.clearInputField();
     }
 
@@ -227,6 +234,7 @@ public class Question : MonoBehaviour
     {
         yield return new WaitForSeconds(5.0f);
         questionCanvas.gameObject.SetActive(true);
+        canShowHint = true;
         InputAnswer.ActivateInputField();
         questionNo = 101;
         questionText.text = "เวลาการเชคสติไม่ควรเกินกี่นาที";
@@ -236,21 +244,29 @@ public class Question : MonoBehaviour
     {
         yield return new WaitForSeconds(5.0f);
         questionCanvas.gameObject.SetActive(true);
+        canShowHint = true;
         InputAnswer.ActivateInputField();
         questionNo = 102;
-        questionText.text = "เบอร์โทรฉฉ.คือ?";
+        questionText.text = "เบอร์โทรสพฉ.คือ?";
         hint = "1669"; 
     }
     IEnumerator DelayShoulderText()
     {
         yield return new WaitForSeconds(3.0f);
         shoulder.SetActive(true);
-        shoulderText.text = "ลองตบบ่าสกิดผู้ป่วย";
+        guideText.text = "ลองตบบ่าสกิดผู้ป่วย";
     }
     void ReadyToCall()
     {
         Debug.Log("Phpne spawn");
+        guideText.text = "กดโทรเรียกสพฉ.";
         phone.SetActive(true);
+        StartCoroutine(RemovePhoneText());
+    }
+    IEnumerator RemovePhoneText()
+    {
+        yield return new WaitForSeconds(3.0f);
+        guideText.text = "";
     }
 
 }
