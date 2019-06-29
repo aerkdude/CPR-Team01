@@ -8,6 +8,7 @@ public class TutorialKeyboard : MonoBehaviour
 {
     public GameObject inputObject;
     public InputField inputField;
+    public GameObject fadeIn;
     public Text guideText;
     public Text placeHolder;
     private string guess;
@@ -32,7 +33,7 @@ public class TutorialKeyboard : MonoBehaviour
 
     IEnumerator PopIntroText()
     {
-        yield return new WaitForSeconds(8.0f);
+        yield return new WaitForSeconds(13.0f);
         inputObject.gameObject.SetActive(true);
         guideText.text = "กำลังจะเริ่มทำแบบทดสอบ ถ้าคุณพร้อมแล้วให้พิมพ์คำว่า “ตกลง” ";
         placeHolder.text = "“ตกลง”";
@@ -43,7 +44,7 @@ public class TutorialKeyboard : MonoBehaviour
         guess = inputField.text;
         if(guess == "ตกลง")
         {
-            SceneManager.LoadScene(1);
+            StartCoroutine(waitFade());
             Debug.Log("ตกลงsssasdads");
         }
         else
@@ -52,5 +53,11 @@ public class TutorialKeyboard : MonoBehaviour
         }
         //Debug.Log(guess);
         
+    }
+    IEnumerator waitFade()
+    {
+        fadeIn.GetComponent<FadeIn>().FadeOutAnim();
+        yield return new WaitForSeconds(5.0f);
+        SceneManager.LoadScene(1);
     }
 }

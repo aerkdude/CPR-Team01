@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
@@ -10,6 +11,7 @@ public class GameController : MonoBehaviour
     public Text timeText;
     public Text hpPercText;
     public static bool gameStart;
+    public static bool gameEnd;
     public static bool timeStart;
     private int hpPerc;
     private int hpPercCeil;
@@ -21,9 +23,26 @@ public class GameController : MonoBehaviour
     public bool canPush;
     public int curHp;
     public static float pushHp;
+    public static float falseHp;
+    public float timer;
+
+    //Score System
+    public GameObject resultPanel;
+    public Text pumpScoreText;
+    public Text quizScoreText;
+    public Text overallResultText;
+    public int pumpScore;
+
     // Start is called before the first frame update
     void Start()
     {
+        greenCube.SetActive(false);
+        gameEnd = false;
+        quizScoreText.text = "";
+        resultPanel.SetActive(false);
+        pumpScoreText.text = "";
+        overallResultText.text = "";
+        pumpScore = 0;
         timeStart = false;
         timeText.text = "";
         hpPercText.text = "";
@@ -31,11 +50,10 @@ public class GameController : MonoBehaviour
         slideValue = curTime / maxHP;
         hpLeft = 120f;
         curTime = 120f;
-        canPush = true;
+        canPush = false;
         startTime = 120.0f;
-        pushHp = 20.0f;
-
-        
+        pushHp = 10.0f;
+        //falseHp = 2.0f;
     }
 
     // Update is called once per frame
@@ -44,19 +62,71 @@ public class GameController : MonoBehaviour
         if (gameStart)
         {
             CprStart();
-
+            timer += Time.deltaTime;
+            if (timer >= 0.6f)
+            {
+                timer = 0.0f;
+            }
+            if(timer>=0 && timer<= 0.12)
+            {
+                canPush = true;
+            }
+            if (timer > 0.12)
+            {
+                canPush = false;
+            }
         }
-        if (Input.GetKeyDown(KeyCode.S))
+        /*if (Input.GetKeyDown(KeyCode.S))
         {
             gameStart = true;
-        }
+        }*/
         if(timeStart)
         {
             InvokeRepeating("GoTime", 0.0f, 1.0f);
             timeStart = false;
         }
+
+        if (curTime <= 0)
+        {
+            curTime = 0;
+            gameStart = false;
+            CancelInvoke("GoTime");
+            showResult();
+        }
+
+        if (gameEnd)
+        {
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                SceneManager.LoadScene(0);
+            }
+        }
+
+        if(Question.paperOnScreen >= 1)
+        {
+            pushHp = 5.0f;
+        }
+        if (Question.paperOnScreen < 1)
+        {
+            pushHp = 10.0f;
+        }
     }
 
+    public void showResult()
+    {
+        resultPanel.SetActive(true);
+        pumpScoreText.text = "ปั๊มจำนวน: "+pumpScore+" / 100";
+        quizScoreText.text = "คะแนน Quiz: " + Question.quizScore + " / 10";
+        if(pumpScore >= 100 && Question.quizScore > 10)
+        {
+            overallResultText.text = "คุณผ่านการทดสอบ";
+        }
+        else
+        {
+            overallResultText.text = "คุณไม่ผ่านการทดสอบ";
+        }
+        gameEnd = true;
+    }
     private void CprStart()
     {
         slideValue = hpLeft / maxHP;
@@ -71,12 +141,12 @@ public class GameController : MonoBehaviour
         }
         if (canPush)
         {
-            if (Input.GetKeyDown(KeyCode.A))
+            /*if (Input.GetKeyDown(KeyCode.A))
             {
                 Heal();
                 StartCoroutine(DelayPush());
                 Debug.Log("Hit");
-            }
+            }*/
         }
         if (canPush)
         {
@@ -85,6 +155,7 @@ public class GameController : MonoBehaviour
         if (!canPush)
         {
             greenCube.gameObject.SetActive(false);
+            //hpLeft -= falseHp;
         }
     }
 
@@ -95,7 +166,7 @@ public class GameController : MonoBehaviour
             if (other.gameObject.CompareTag("CheckHand"))
             {
                 Heal();
-                StartCoroutine(DelayPush());
+                //StartCoroutine(DelayPush());
                 Debug.Log("Hit");
             }
         }
@@ -110,6 +181,7 @@ public class GameController : MonoBehaviour
     }
     void Heal()
     {
+        pumpScore++;
         hpLeft += pushHp;
         Debug.Log("heal:" + pushHp);
         if(hpLeft>=maxHP)
@@ -121,26 +193,20 @@ public class GameController : MonoBehaviour
     IEnumerator DelayPush()
     {
         canPush = false;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.6f);
         canPush = true;
     }
     
     ///
    /* string nameA, nameB;
-
     void test()
     {
         for (int i = 0; i < nameA.Length; i++)
         {
             if (nameA[i] == nameB[i])
             {
-
             }
-
             }
-
     }*/
-
     ///
-
 }
